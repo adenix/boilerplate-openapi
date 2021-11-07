@@ -1,0 +1,65 @@
+openapi: "3.0.3"
+info:
+  version: 1.0.0
+  title: OpenAPI Boilerplate
+  description: Template for services using generation with the OpenAPI specification
+tags:
+  - name: System
+  - name: Greeting
+paths:
+  /info:
+    get:
+      tags:
+        - System
+      responses:
+        '200':
+          description: info response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  version:
+                    type: string
+  /greeting:
+    get:
+      tags:
+        - Greeting
+      responses:
+        '200':
+          description: greeting response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Greeting'
+  /greeting/{name}:
+    get:
+      tags:
+        - Greeting
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: name that should be used in the greeting
+      responses:
+        '200':
+          description: greeting response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Greeting'
+components:
+  schemas:
+    Greeting:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
