@@ -12,8 +12,8 @@ import (
 //go:embed swagger_ui
 var swaggerUI embed.FS
 
-// GetSwaggerUIHandler returns an HTTP handler for the Swagger UI
-func GetSwaggerUIHandler(e *echo.Echo) http.Handler {
+// SwaggerUIHandler returns an HTTP handler for the Swagger UI
+func SwaggerUIHandler(e *echo.Echo) http.Handler {
 	mime.AddExtensionType(".svg", "image/svg+xml")
 	subFS, err := fs.Sub(swaggerUI, "swagger_ui")
 	if err != nil {

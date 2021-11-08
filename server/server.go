@@ -28,7 +28,7 @@ func Run(addr string) error {
 
 	e.GET("/v3/api-docs", GetSpec)
 	e.GET("/swagger-ui", echo.WrapHandler(http.RedirectHandler("/swagger-ui/", http.StatusMovedPermanently)))
-	e.GET("/swagger-ui/*", echo.WrapHandler(third_party.GetSwaggerUIHandler(e)))
+	e.GET("/swagger-ui/*", echo.WrapHandler(third_party.SwaggerUIHandler(e)))
 
 	p := prometheus.NewPrometheus("echo", nil)
 	p.Use(e)
