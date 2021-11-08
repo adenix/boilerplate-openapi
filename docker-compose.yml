@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+
+  app:
+    build:
+      context: .
+    ports:
+      - 8080:8080
+    
+  prometheus:
+    image: prom/prometheus:v2.31.1
+    ports:
+      - 9090:9090
+    command: --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
