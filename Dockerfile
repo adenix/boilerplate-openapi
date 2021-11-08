@@ -1,5 +1,14 @@
 FROM golang:1.17-alpine3.14 AS builder
 
+ENV \
+    GOOS=linux \
+    GOARCH=amd64
+
+RUN \
+    apk update && \
+    apk add make  && \
+    rm -rf /var/cache/apk/*
+
 RUN adduser \    
     --disabled-password \    
     --gecos "" \    
@@ -16,17 +25,16 @@ COPY go.sum .
 RUN go mod download
 
 COPY . .
-RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o ./bin/server ./cmd/...
+RUN make flags='-ldflags="-w -s"' build
 
 
-# TODO: Move to scratch, blocked by issue with M1
-FROM alpine:3.14
+FROM scratch
 
 # Import the user and group files from the builder.
 COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
 
-COPY --from=builder --chown=appuser:appuser /build/bin/server /app/server
+COPY --from=builder --chown=appuser:appuser /build/bin/demo /app/server
 
 # Use an unprivileged user.
 USER appuser:appuser

@@ -1,4 +1,9 @@
 
+### Application ###
+bin/
+cover/
+
+
 # Created by https://www.toptal.com/developers/gitignore/api/go,visualstudiocode,vim,macos,linux,windows,goland
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,visualstudiocode,vim,macos,linux,windows,goland
 
