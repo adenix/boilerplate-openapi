@@ -6,8 +6,7 @@ ENV \
 
 RUN \
     apk update && \
-    apk add make  && \
-    rm -rf /var/cache/apk/*
+    apk add make
 
 RUN adduser \    
     --disabled-password \    
