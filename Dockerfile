@@ -2,7 +2,8 @@ FROM golang:1.17-alpine3.14 AS builder
 
 ENV \
     GOOS=linux \
-    GOARCH=amd64
+    GOARCH=amd64 \
+    CGO_ENABLED=0
 
 RUN \
     apk update && \
